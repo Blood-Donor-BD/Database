@@ -1,747 +1,1177 @@
-<html lang="en"><head><meta charset="UTF-8"></meta><meta content="width=1024,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport"></meta><title>Blood Donor BD</title><style>body{font-family:Arial,sans-serif;text-align:center;background-color:#f8f9fa;margin:0;padding:20px;min-width:1024px;overflow-x:auto}h2{color:#d9534f}button,input,select{padding:10px;margin:5px;border:1px solid #ddd;border-radius:5px;font-size:16px}input,select{width:90%;max-width:300px}button{background-color:#d9534f;color:#fff;cursor:pointer}button:hover{background-color:#c9302c}table{width:100%;margin-top:20px;border-collapse:collapse;background:#fff;box-shadow:0 4px 8px rgba(0,0,0,.1)}td,th{padding:7px;border:1px solid #ddd;text-align:center;font-size:60%}th{background-color:#d9534f;color:#fff}tr:nth-child(even){background-color:#f2f2f2}.autocomplete-items{position:absolute;background:#fff;border:1px solid #ddd;max-height:150px;overflow-y:auto;z-index:1000;width:90%;max-width:300px}.autocomplete-items div{padding:10px;cursor:pointer}.autocomplete-items div:hover{background-color:#f2f2f2}#addInfoContainer{margin-bottom:15px}#addInfoButton{background-color:#5cb85c;font-size:16px}#addInfoButton:hover{background-color:#4cae4c}#webDeveloper{position:absolute;top:10px;right:10px;font-size:12px;color:#d9534f;cursor:pointer}</style></head><body>
-</html>
-<style>
-  @keyframes neonGlow {
-    0%, 100% {
-      text-shadow:
-        0 0 5px #ff004f,
-        0 0 10px #ff004f,
-        0 0 20px #ff004f,
-        0 0 30px #ff004f,
-        0 0 40px #ff004f,
-        0 0 50px #ff004f,
-        0 0 75px #ff004f;
-      opacity: 1;
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Blood Donor BD | Save Lives Through Blood Donation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #c62828;
+            --primary-dark: #b71c1c;
+            --primary-light: #ff5f52;
+            --secondary: #007A32;
+            --accent: #00B140;
+            --light: #f8f9fa;
+            --dark: #333;
+            --gray: #6c757d;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s ease;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
 
-    50% {
-      text-shadow:
-        0 0 10px #00ffff,
-        0 0 20px #00ffff,
-        0 0 30px #ff00ff,
-        0 0 40px #ff00ff,
-        0 0 50px #ff00ff,
-        0 0 75px #ff00ff;
-    }
-  }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  #neon-welcome {
-    font-family: 'Roboto', sans-serif;
-    font-size: 62px;
-    font-weight: bold;
-    text-align: center;
-    color: white;
-    letter-spacing: 4px;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+            min-width: 1024px;
+            overflow-x: auto;
+        }
 
-    animation: neonGlow 2.5s ease-in-out infinite;
+        /* Header Styles */
+        .header {
+            background: var(--gradient);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-    margin-top: 20px;
-    background-color: #c9302c;
-    padding: 30px 40px;
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
 
-    border-radius: 16px;
-    z-index: 9999;
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
 
-    position: fixed;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-left: -80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            transition: var(--transition);
+        }
 
-    width: auto;
-    max-width: 90%;
-    line-height: 1.6;
+        .logo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+        }
 
-    box-shadow:
-      0 0 30px #ff004f,
-      0 0 40px #ff004f,
-      0 0 50px #ff004f;
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
 
-    transition:
-      opacity 0.5s ease,
-      visibility 0s 0.5s;
-  }
+        .logo-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-  #neon-welcome.hide {
-    opacity: 0;
-    visibility: hidden;
-  }
-</style>
+        .logo-tagline {
+            font-size: 1rem;
+            opacity: 0.95;
+            margin-top: 0.3rem;
+            font-weight: 500;
+        }
 
-<div id="neon-welcome">
-  Welcome&nbsp;&nbsp;to&nbsp;&nbsp;<span style="color:#00ffff;">Blood Donor BD</span>
-</div>
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
 
-<script>
-  setTimeout(function () {
-    document.getElementById('neon-welcome').classList.add('hide');
-  }, 3000);
-</script>
-<div style="position: absolute; top: 10px; left: 10px;">
-    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiX3OW5MKsXyEr_acEYrI53dUwJZiKIS9BhmLD3I4izx0zGNxnqsHFh68Qp1mWup-HB0ZZa-Oy2Nk1dmbclSZgho6e1605dbPiP6WGIQgsq-QIJM-_Wvd8dNDZcjmpbXwAjcw2hkuWuSRt_a7KqWYWMHfFclfQ2P4u7LhKNfKns0-eXMzm4WZNLhyphenhyphenNcphI/s1280/1000024555.png" 
-         alt="Blood Donor BD" 
-         style="width: 90px; height: 90px; object-fit: cover; border-radius: 50%;">
-</div>
-<style>
-  .banner {
-    width: 100%;
-    height: 100px;
-    background: linear-gradient(45deg, #007A32, #CE2029);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.7), 0 0 10px rgba(0, 122, 50, 0.7), 0 0 10px rgba(206, 32, 41, 0.7);
-    font-family: Arial, sans-serif;
-    background-size: cover;
-  }
+        .action-btn {
+            padding: 0.8rem 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
+        
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
-  .text-container {
-    text-align: center;
-  }
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
 
-  .tagline {
-    font-size: 12px;
-    font-weight: bold;
-    margin-top: 0px;
-    letter-spacing: 2px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.8); /* Tagline shadow */
-  }
+        .action-btn.register {
+            background: var(--accent);
+          
+            border-color: var(--accent);
+        }
 
-  img {
-    width: 50px;
-    height: auto;
-    margin-bottom: 0px;
-    filter:
-      drop-shadow(2px 2px 4px rgba(0,0,0,0.8)) /* Black shadow behind logos */
-      drop-shadow(0 0 5px rgba(0, 122, 50, 0.7))
-      drop-shadow(0 0 5px rgba(206, 32, 41, 0.7));
-  }
-</style>
+        .action-btn.register:hover {
+            background: #009936;
+            border-color: #009936;
+        }
 
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)), 
+                        url('https://images.unsplash.com/photo-1576153192396-3d9d038c8d58?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient);
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(45deg, #fff, #ffeb3b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            font-weight: 300;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .stat {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+        }
+
+        .stat:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--primary-light);
+            display: block;
+            text-shadow: 0 0 10px rgba(255, 95, 82, 0.5);
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        /* Search Section */
+        .search-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 1.1rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: #f8f9fa;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.1);
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(198, 40, 40, 0.3);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary), #005a25);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 8px 25px rgba(0, 122, 50, 0.3);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--accent), #008033);
+        }
+
+        .btn-success:hover {
+            box-shadow: 0 8px 25px rgba(0, 177, 64, 0.3);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            justify-content: center;
+        }
+
+        /* Table Styles */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            border: 1px solid #e9ecef;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 1rem;
+        }
+
+        .data-table th {
+            background: var(--gradient);
+            color: white;
+            padding: 1.2rem;
+            text-align: left;
+            font-weight: 700;
+            font-size: 1.1rem;
+            position: sticky;
+            top: 0;
+        }
+
+        .data-table td {
+            padding: 1.2rem;
+            border-bottom: 1px solid #f1f3f4;
+            transition: var(--transition);
+        }
+
+        .data-table tr:hover {
+            background-color: #f8f9fa;
+            transform: scale(1.01);
+        }
+
+        .data-table tr:hover td {
+            background-color: #f8f9fa;
+        }
+
+        /* Autocomplete Styles */
+        .autocomplete-items {
+            position: absolute;
+            background: white;
+            border: 2px solid var(--primary);
+            border-top: none;
+            z-index: 99;
+            top: 100%;
+            left: 0;
+            right: 0;
+            max-height: 200px;
+            overflow-y: auto;
+            border-radius: 0 0 12px 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .autocomplete-items div {
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            border-bottom: 1px solid #f1f1f1;
+            transition: var(--transition);
+        }
+
+        .autocomplete-items div:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: linear-gradient(135deg, var(--dark), #111);
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 10px;
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px) rotate(5deg);
+            box-shadow: 0 5px 15px rgba(198, 40, 40, 0.4);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 1rem;
+            color: #aaa;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Blood Drop Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        .blood-drop {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient);
+            border-radius: 10px;
+            border: 2px solid #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Responsive Design for Desktop Mode */
+        @media (max-width: 1024px) {
+            body {
+                min-width: 1024px;
+                overflow-x: auto;
+            }
+            
+            .container {
+                min-width: 1024px;
+            }
+            
+            .header-container {
+                min-width: 1024px;
+            }
+            
+            .footer-container {
+                min-width: 1024px;
+            }
+        }
+
+        /* Animation for elements */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* Glow effect for important elements */
+        .glow {
+            box-shadow: 0 0 20px rgba(198, 40, 40, 0.3);
+        }
+
+        /* Pulse animation for CTA buttons */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
 </head>
 <body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiX3OW5MKsXyEr_acEYrI53dUwJZiKIS9BhmLD3I4izx0zGNxnqsHFh68Qp1mWup-HB0ZZa-Oy2Nk1dmbclSZgho6e1605dbPiP6WGIQgsq-QIJM-_Wvd8dNDZcjmpbXwAjcw2hkuWuSRt_a7KqWYWMHfFclfQ2P4u7LhKNfKns0-eXMzm4WZNLhyphenhyphenNcphI/s1280/1000024555.png" alt="Blood Donor BD" class="logo blood-drop">
+                <div class="logo-text">
+                    <h1 class="logo-title">Blood Donor BD</h1>
+                    <p class="logo-tagline">Your donation can save many lives</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSc2AhG_yMIUFhyU53ExHePIZoun9qa0ldME2yuE1FJBZ7bTaw/viewform" target="_blank" class="action-btn register">
+                    <i class="fas fa-user-plus"></i> Register as Donor
+                </a>
+                <a href="https://blooddonor-database.blogspot.com/2025/04/blood-donor-bd-body-font-family-segoe.html" target="_blank" class="action-btn">
+                    <i class="fas fa-sign-in-alt"></i> Admin Login
+                </a>
+                <div style="text-align:center; margin-left:35px; margin-right:-80px;"><a href="https://mdashfaqurrahmantanim.blogspot.com/2024/11/mdashfaq.com.html?m=1" 
+   title="Md. Ashfaqur Rahman Tanim">
+  <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhCDeXufBywGlGcvjFv5OaZNnGnIFboYZgUyo9NPcDt7SH5dWhG6Kv7wOtGMm5uBfA-2RCI41U0IWscQhEPQ9_6mHg192N68FaFDDE4HIfb8zXw6Ubafj329ToS6mYTqHo8Wu8aRidwjczDQZ4Id_t7K-E32b8ZthoHTIH3r86pWwfOmFdNvgcQOOeHBDc/s2000/1000038033.png" 
+       alt="Md. Ashfaqur Rahman Tanim" 
+       style="width:80px; height:80px; border-radius:50%; margin-top:10px;">
+</a><p style="font-size: 12px;">Md. Ashfaqur Rahman Tanim</div>
+            </div>
+        </div>
+    </header>
 
-  <!--Blood Donor BD Banner Section -->
-  <div class="banner">
-    <div class="text-container">
-      
-      
-      <div class="tagline"><b>"Your Donation Can Save Many Lives - Donate Blood, Be a Hero"</b></div>
-      <div class="tagline-sub">Register Now as a Donor</div>
-    </div>
-  </div>
-  
-
-</body>
-<div id="webDeveloper" onclick="window.open(&quot;https://mdashfaqurrahmantanim.blogspot.com/2024/11/mdashfaq.com.html?m=1&quot;,&quot;_blank&quot;)">Web Developer: Md. Ashfaqur Rahman Tanim<br /><img alt="Md. Ashfaqur Rahman Tanim" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEineU2oIBAtgbXgrH4Rto9IaLe1daQMWpxs5UMFBgTrEi30Kf03Bd4kWiVWV6H3oU7yaCFJ684KML8m2g6YajT4tyrW3TLjqcIrkkVZGrJpDwwy33LPMSVSt-eu12IQ1pvbnjo3pZD0UCnOGyVrwPLZ7jHyRIUS8zFlcCytE5wIBN0HTFEVSn4_5ljGa1w/s4096/1000033316.png" style="border-radius: 50%; height: 65px; object-fit: cover; width: 65px;" />
-
-
-<br /></div><h2><b>Blood Donor BD Database</b></h2>
-
-<!-- Blood Request Template Button -->
-<button class="bloodModal-btn" onclick="bloodModal.show()">🩸 Blood Request Template</button>
-
-<!-- Popup Modal -->
-<div id="bloodModal" class="bloodModal-container">
-  <div class="bloodModal-content">
-    <span class="bloodModal-close" onclick="bloodModal.close()">&times;</span>
-    <h1><i class="fas fa-tint"></i> Blood Request</h1>
-
-    <label for="bloodModal-patientName">Patient Name</label>
-    <input type="text" id="bloodModal-patientName">
-
-    <label for="bloodModal-patientProblem">Patient Condition</label>
-    <textarea id="bloodModal-patientProblem"></textarea>
-
-    <label for="bloodModal-bloodGroup">Blood Group</label>
-    <select id="bloodModal-bloodGroup">
-      <option value="">Select Blood Group</option>
-      <option>A+</option><option>A-</option>
-      <option>B+</option><option>B-</option>
-      <option>AB+</option><option>AB-</option>
-      <option>O+</option><option>O-</option>
-    </select>
-
-    <label for="bloodModal-units">Units/bags Needed</label>
-    <input type="number" id="bloodModal-units">
-
-    <label for="bloodModal-hospital">Hospital Name</label>
-    <input type="text" id="bloodModal-hospital">
-
-    <label for="bloodModal-hospitalAddress">Hospital Address</label>
-    <input type="text" id="bloodModal-hospitalAddress">
-
-    <label for="bloodModal-contactName">Contact Person</label>
-    <input type="text" id="bloodModal-contactName">
-
-    <label for="bloodModal-contactNumber">Contact Number</label>
-    <input type="text" id="bloodModal-contactNumber">
-
-    <label for="bloodModal-urgency">Urgency</label>
-    <select id="bloodModal-urgency">
-      <option value="">Select</option>
-      <option>Now</option>
-      <option>Immediate</option>
-      <option>Within 24 hours</option>
-      <option value="Specify">Specify</option>
-    </select>
-    <input type="datetime-local" id="bloodModal-customTime" style="display:none;">
-
-    <div class="bloodModal-btn-group">
-      <button onclick="bloodModal.generate()">Generate</button>
-      <button onclick="bloodModal.copy()">Copy</button>
-      <button onclick="bloodModal.email()">Email</button>
-    </div>
-
-    <div id="bloodModal-generatedTemplate">Your generated message will appear here...</div>
-
-    <div class="bloodModal-share-links" id="bloodModal-shareLinks" style="display:none;">
-      <p><b>Share this request:</b></p>
-      <a href="#" id="bloodModal-fbShare" target="_blank"><i class="fab fa-facebook"></i></a>
-      <a href="#" id="bloodModal-waShare" target="_blank"><i class="fab fa-whatsapp"></i></a>
-      <a href="#" id="bloodModal-msShare" target="_blank"><i class="fab fa-facebook-messenger"></i></a>
-    </div>
-  </div>
-</div>
-
-<!-- Scoped CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
-/* Button */
-.bloodModal-btn {
-  padding: 12.25px 18px; font-size:16px; 
-  background:#c62828; color:#fff; border:none; border-radius:8px; cursor:pointer;
-  transition:0.3s;
-}
-.bloodModal-btn:hover { background:#b71c1c; }
-
-/* Modal Container */
-.bloodModal-container { display:none; position:fixed; z-index:999; left:0; top:0; width:100%; height:100%; overflow:auto; background:rgba(0,0,0,0.5); }
-
-/* Modal Content */
-.bloodModal-content {
-  background:#fff; margin:5% auto; padding:25px 30px;
-  border-radius:15px; max-width:700px; box-shadow:0 8px 30px rgba(0,0,0,0.2);
-  position:relative; text-align:left;
-}
-.bloodModal-close { position:absolute; top:15px; right:20px; color:#c62828; font-size:28px; cursor:pointer; }
-.bloodModal-close:hover { color:#000; }
-
-.bloodModal-content h1 { text-align:center; color:#c62828; margin-bottom:20px; }
-.bloodModal-content label { display:block; margin:10px 0 5px; font-weight:bold; color:#333; }
-.bloodModal-content input, 
-.bloodModal-content select, 
-.bloodModal-content textarea, 
-.bloodModal-content button { width:100%; padding:10px; border-radius:8px; border:1px solid #ddd; font-size:15px; margin-bottom:10px; }
-.bloodModal-content textarea { resize: vertical; min-height:70px; }
-
-.bloodModal-btn-group { display:flex; gap:10px; margin-top:15px; }
-.bloodModal-btn-group button { flex:1; background-color:#c62828; color:#fff; border:none; border-radius:8px; padding:10px; }
-.bloodModal-btn-group button:hover { background-color:#b71c1c; }
-
-#bloodModal-generatedTemplate { background:#f9f9f9; padding:12px; border-radius:10px; font-family:monospace; white-space:pre-wrap; border:1px solid #ddd; margin-top:15px; }
-
-.bloodModal-share-links { text-align:center; margin-top:20px; }
-.bloodModal-share-links a { margin:0 8px; font-size:26px; color:#c62828; transition: transform 0.3s; }
-.bloodModal-share-links a:hover { transform:scale(1.2); }
-
-/* Mobile */
-@media (max-width:600px){
-  .bloodModal-content { width:95%; margin:10% auto; padding:20px; }
-  .bloodModal-btn-group { flex-direction:column; }
-}
-</style>
-
-<!-- Scoped JS -->
-<script>
-const bloodModal = (function(){
-  const modal = document.getElementById('bloodModal');
-  const customTime = document.getElementById('bloodModal-customTime');
-  const generatedTemplate = document.getElementById('bloodModal-generatedTemplate');
-  const shareLinks = document.getElementById('bloodModal-shareLinks');
-  const fbShare = document.getElementById('bloodModal-fbShare');
-  const waShare = document.getElementById('bloodModal-waShare');
-  const msShare = document.getElementById('bloodModal-msShare');
-
-  function show(){ modal.style.display = "block"; }
-  function close(){ modal.style.display = "none"; }
-  function toggleCustomTime(){
-    customTime.style.display = document.getElementById('bloodModal-urgency').value==='Specify' ? 'block':'none';
-  }
-  function generate(){
-    const patientName = document.getElementById('bloodModal-patientName').value||"[Patient]";
-    const patientProblem = document.getElementById('bloodModal-patientProblem').value||"[Condition]";
-    const bloodGroup = document.getElementById('bloodModal-bloodGroup').value||"[Group]";
-    const units = document.getElementById('bloodModal-units').value||"[Units]";
-    const hospital = document.getElementById('bloodModal-hospital').value||"[Hospital]";
-    const hospitalAddress = document.getElementById('bloodModal-hospitalAddress').value||"[Address]";
-    const contactName = document.getElementById('bloodModal-contactName').value||"[Contact]";
-    const contactNumber = document.getElementById('bloodModal-contactNumber').value||"[Number]";
-    
-    let urgency = document.getElementById('bloodModal-urgency').value||"[Urgency]";
-    if(urgency==='Specify' && customTime.value){
-      const d = new Date(customTime.value);
-      let h = d.getHours(); const m = d.getMinutes().toString().padStart(2,'0');
-      const ampm = h>=12?'PM':'AM'; h=h%12||12;
-      urgency = `${d.getFullYear()}-${(d.getMonth()+1).toString().padStart(2,'0')}-${d.getDate().toString().padStart(2,'0')} ${h}:${m} ${ampm}`;
-    }
-
-    const template = `🩸 URGENT BLOOD REQUEST 🩸
-
-👤 Patient: ${patientName}
-🩸 Blood Group: ${bloodGroup}
-📦 Units/Bags: ${units}
-🏥 Hospital: ${hospital}
-📍 Address: ${hospitalAddress}
-💉 Condition: ${patientProblem}
-📞 Contact: ${contactName}
-📱 Phone: ${contactNumber}
-🔊 Urgency: ${urgency}
-
-🙏 How You Can Help:
-1. Contact the number above immediately if you are eligible and available.
-2. Share this post to save lives.
-
-💖 Blood Donor BD recommends sharing responsibly. Visit: https://blood-donor-bd.github.io/Database/`;
-
-    generatedTemplate.textContent = template;
-    shareLinks.style.display = 'block';
-    const encoded = encodeURIComponent(template);
-    fbShare.href = `https://www.facebook.com/sharer/sharer.php?u=https://blooddonor-database.blogspot.com/2025/03/blood-donor-database-row.html&quote=${encoded}`;
-    waShare.href = `https://wa.me/?text=${encoded}`;
-    msShare.href = `fb-messenger://share/?link=${encoded}`;
-  }
-  function copy(){ navigator.clipboard.writeText(generatedTemplate.textContent).then(()=>alert("Copied!")); }
-  function email(){ window.location.href = `mailto:blooddonorbd25@gmail.com?subject=Blood Request&body=${encodeURIComponent(generatedTemplate.textContent)}`; }
-
-  // Event for urgency select
-  document.getElementById('bloodModal-urgency').addEventListener('change', toggleCustomTime);
-
-  // Click outside modal to close
-  window.addEventListener('click', e => { if(e.target===modal) close(); });
-
-  return { show, close, toggleCustomTime, generate, copy, email };
-})();
-</script>
-
-
-<a href="https://blooddonor-database.blogspot.com/2025/04/blood-donor-bd-body-font-family-segoe.html" target="_blank">
-  <button style="background-color:#c62828; color:white; padding:12px 20px; border:none; border-radius:8px; cursor:pointer; font-size:16px; font-family:Segoe UI;">
-    Donors Admin LOGIN
-  </button>
-</a>
-
-<div id="addInfoContainer"><a href="https://docs.google.com/forms/d/e/1FAIpQLSc2AhG_yMIUFhyU53ExHePIZoun9qa0ldME2yuE1FJBZ7bTaw/viewform" target="_blank"><button id="addInfoButton">➕ Register as a DONOR</button></a><style>
-  .donor-section {
-    display: flex;
-    justify-content: center; /* Centers the items horizontally */
-    align-items: center; /* Centers the items vertically within the row */
-    margin: 20px 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-
-  .donor-box {
-    display: flex;
-    align-items: center; /* Ensures items are aligned in a row */
-  }
-
-  .donor-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: #444;
-    margin-right: 10px; /* Adds spacing between text and badge */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Added deeper shadow to text */
-  }
-
-  .donor-badge {
-    display: inline-block;
-    background: linear-gradient(to right, #d32f2f, #b71c1c);
-    color: white;
-    font-size: 22px;
-    font-weight: bold;
-    padding: 12px 24px;
-    border-radius: 40px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6); /* Deeper shadow effect for the badge */
-    animation: popIn 0.5s ease-in-out;
-    margin: 0 10px; /* Adds spacing between badge and "Donors" */
-    cursor: pointer; /* Indicates the badge is clickable */
-  }
-
-  @keyframes popIn {
-    0% { transform: scale(0.8); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
-  }
-
-  .donor-text {
-    font-size: 18px;
-    font-weight: 500;
-    color: #444;
-  }
-</style>
-
-<div class="donor-section">
-  <div class="donor-box">
-    <div class="donor-title">Total</div>
-    <div class="donor-badge" id="totalDonorDisplay" onclick="fetchTotalDonors()">Loading...</div>
-    <div class="donor-title">Donors</div>
-  </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content fade-in">
+            <h1 class="hero-title">Donate Blood, Save Lives</h1>
+            <p class="hero-subtitle">Find blood donors across Bangladesh when you need them most. Join our mission to save lives through voluntary blood donation.</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number" id="totalDonorDisplay">Loading...</span>
+                    <span class="stat-label">Registered Donors</span>
+                </div>
+<!-- District Count UI -->
+<div class="stat">
+    <span class="stat-number" id="totalDistrictDisplay">Loading...</span>
+    <span class="stat-label">Districts Covered</span>
 </div>
 
 <script>
-  async function fetchTotalDonors() {
-    const sheetURL = 'https://docs.google.com/spreadsheets/d/1p3LQrm9pfvewDNXGZ5sIN_a6hwfbn4AqBcwp8eGPibQ/export?format=tsv';
-
-    try {
-      const response = await fetch(sheetURL);
-      const tsvText = await response.text();
-      const rows = tsvText.trim().split('\n').map(row => row.split('\t'));
-
-      // L2 = 2nd row (index 1), 12th column (index 11)
-      const totalDonors = rows[1][11];
-
-      document.getElementById('totalDonorDisplay').innerText = totalDonors;
-    } catch (error) {
-      console.error('Error fetching total donors:', error);
-      document.getElementById('totalDonorDisplay').innerText = 'N/A';
-    }
-  }
-
-  // Initially fetch the total donors
-  fetchTotalDonors();
-</script>
-
-</div><select id="searchBlood"><option value="">Select Blood Group</option><option value="A+">A+</option><option value="A-">A-</option><option value="B+">B+</option><option value="B-">B-</option><option value="AB+">AB+</option><option value="AB-">AB-</option><option value="O+">O+</option><option value="O-">O-</option></select><div style="display: inline-block; position: relative;"><input id="searchDistrict" oninput="showSuggestions(&quot;district&quot;)" placeholder="Enter District" type="text" /><div class="autocomplete-items" id="autocomplete-list"></div></div><div style="display: inline-block; position: relative;"><input id="searchUpazila" oninput="showSuggestions(&quot;upazila&quot;)" placeholder="Enter Upazila/Area" type="text" /><div class="autocomplete-items" id="autocomplete-upazila"></div></div><button onclick="searchDonors()">🔍Search</button><button onclick="copyToClipboard()">📋 Copy Information</button>
-<button onclick="downloadCSV()">📥 Download CSV</button><button onclick="downloadPDF()" style="background-color: #d9534f; color: white; border: none; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer;">
-  Download PDF
-  </button>
-
-<script>
-    function copyToClipboard() {
-        let table = document.getElementById("donorTable");
-        let rows = table.querySelectorAll("tr");
-        let copyText = "Email,Phone Number,District,Upazila/Area\n"; // CSV Header
-
-        for (let i = 1; i < rows.length; i++) { // Skip header row
-            let cells = rows[i].querySelectorAll("td");
-            if (cells.length > 0) {
-                let email = cells[1].innerText.trim();
-                let phone = cells[3].innerText.trim();
-                let district = cells[4].innerText.trim();
-                let upazila = cells[5].innerText.trim();
-                copyText += `${email},${phone},${district},${upazila}\n`;
-            }
-        }
-
-        navigator.clipboard.writeText(copyText).then(() => {
-            alert("Information copied to clipboard!");
-        }).catch(err => {
-            console.error("Failed to copy text: ", err);
-        });
-    }
-
-    function downloadCSV() {
-        let table = document.getElementById("donorTable");
-        let rows = table.querySelectorAll("tr");
-        let csvContent = "Email,Phone Number,District,Upazila/Area\n"; // CSV Header
-
-        for (let i = 1; i < rows.length; i++) { // Skip header row
-            let cells = rows[i].querySelectorAll("td");
-            if (cells.length > 0) {
-                let email = cells[1].innerText.trim();
-                let phone = cells[3].innerText.trim();
-                let district = cells[4].innerText.trim();
-                let upazila = cells[5].innerText.trim();
-                csvContent += `${email},${phone},${district},${upazila}\n`;
-            }
-        }
-
-        let csvBlob = new Blob([csvContent], { type: "text/csv" });
-        let url = URL.createObjectURL(csvBlob);
-        let link = document.createElement("a");
-        link.href = url;
-        link.download = "Blood_Donor_Data.csv";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
-</script>
-<table id="donorTable"><tr><th>Registration Date</th><th>Email</th><th>Blood Group</th><th>Phone</th><th>District</th><th>Upazila/Area</th></tr></table><script>let donorData = [];
-    let uniqueDistricts = new Set();
-    let uniqueUpazilas = new Set();
-
-    async function fetchDonors() {
+    // Fetch total districts count
+    async function fetchTotalDistricts() {
         const sheetURL = 'https://docs.google.com/spreadsheets/d/1p3LQrm9pfvewDNXGZ5sIN_a6hwfbn4AqBcwp8eGPibQ/export?format=tsv';
-        
-        
+
         try {
             const response = await fetch(sheetURL);
-            const data = await response.text();
-            const rows = data.split("\n").map(row => row.split("\t"));
-            donorData = rows.slice(1).map(row => ({
-                addedTime: row[0],
-                email: row[1],
-                bloodGroup: row[2],
-                phone: row[3],
-                district: row[4].toUpperCase().trim(),
-                upazila: row[5].toUpperCase().trim()
-            }));
+            const tsvText = await response.text();
+            const rows = tsvText.trim().split('\n').map(row => row.split('\t'));
 
-            donorData.forEach(donor => {
-                uniqueDistricts.add(donor.district);
-                uniqueUpazilas.add(donor.upazila);
-            });
-
-            displayDonors(donorData);
+            // Q2 = 2nd row (index 1), 17th column (index 16)
+            const totalDistricts = rows[1][16];
+            document.getElementById('totalDistrictDisplay').innerText = totalDistricts;
         } catch (error) {
-            console.error("Error fetching data:", error);
-            document.getElementById("donorTable").innerHTML = "<tr><td colspan='6'>Error loading data. Please try again.</td></tr>";
+            console.error('Error fetching total districts:', error);
+            document.getElementById('totalDistrictDisplay').innerText = 'N/A';
         }
     }
 
-    function searchDonors() {
-        let blood = document.getElementById("searchBlood").value.toUpperCase();
-        let district = document.getElementById("searchDistrict").value.toUpperCase().trim();
-        let upazila = document.getElementById("searchUpazila").value.toUpperCase().trim();
+    // Auto run when page loads
+    fetchTotalDistricts();
+</script>
 
-        let filtered = donorData.filter(donor =>
-            (!blood || donor.bloodGroup === blood) &&
-            (!district || donor.district === district) &&
-            (!upazila || donor.upazila === upazila)
-        );
+                <div class="stat">
+                    <span class="stat-number">5+</span>
+                    <span class="stat-label">Lives Saved</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        displayDonors(filtered);
-    }
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Search Section -->
+        <section id="search" class="section fade-in">
+            <h2 class="section-title">Find Blood Donors</h2>
+            <p style="text-align: center; margin-bottom: 2rem; color: var(--gray); font-size: 1.1rem;">
+                Search our comprehensive database of registered blood donors across all districts of Bangladesh
+            </p>
+            
+            <div class="search-container">
+                <div class="form-group">
+                    <label for="searchBlood" class="form-label">
+                        <i class="fas fa-tint" style="color: var(--primary);"></i> Blood Group
+                    </label>
+                    <select id="searchBlood" class="form-control">
+                        <option value="">Select Blood Group</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="searchDistrict" class="form-label">
+                        <i class="fas fa-map-marker-alt" style="color: var(--primary);"></i> District
+                    </label>
+                    <input type="text" id="searchDistrict" class="form-control" placeholder="Enter district name" oninput="showSuggestions('district')">
+                    <div class="autocomplete-items" id="autocomplete-list"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="searchUpazila" class="form-label">
+                        <i class="fas fa-location-arrow" style="color: var(--primary);"></i> Upazila/Area
+                    </label>
+                    <input type="text" id="searchUpazila" class="form-control" placeholder="Enter upazila/area name" oninput="showSuggestions('upazila')">
+                    <div class="autocomplete-items" id="autocomplete-upazila"></div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn pulse" onclick="searchDonors()">
+                    <i class="fas fa-search"></i> Search Donors
+                </button>
+                <button class="btn btn-secondary" onclick="copyToClipboard()">
+                    <i class="fas fa-copy"></i> Copy Information
+                </button>
+                <button class="btn btn-secondary" onclick="downloadCSV()">
+                    <i class="fas fa-download"></i> Download CSV
+                </button>
+                <button class="btn btn-secondary" onclick="downloadPDF()">
+                    <i class="fas fa-file-pdf"></i> Download PDF
+                </button>
+            </div>
+            
+            <div class="table-container">
+                <table class="data-table" id="donorTable">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-calendar"></i> Registration Date</th>
+                            <th><i class="fas fa-envelope"></i> Email</th>
+                            <th><i class="fas fa-tint"></i> Blood Group</th>
+                            <th><i class="fas fa-phone"></i> Phone</th>
+                            <th><i class="fas fa-map"></i> District</th>
+                            <th><i class="fas fa-location-arrow"></i> Upazila/Area</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
 
-    function displayDonors(filteredData) {
-        let tableHTML = "<tr><th>Registration Date</th><th>Email</th><th>Blood Group</th><th>Phone</th><th>District</th><th>Upazila/Area</th></tr>";
-        if (filteredData.length === 0) {
-            tableHTML += "<tr><td colspan='6' style='color:red; font-size:18px;'>No Donor Found</td></tr>";
-        } else {
-            filteredData.forEach(donor => {
-                tableHTML += `<tr>
-                    <td>${donor.addedTime}</td>
-                    <td>${donor.email}</td>
-                    <td>${donor.bloodGroup}</td>
-                    <td><a href="tel:${donor.phone}" style="color:blue;">${donor.phone}</a></td>
-                    <td>${donor.district}</td>
-                    <td>${donor.upazila}</td>
-                </tr>`;
-            });
-        }
-        document.getElementById("donorTable").innerHTML = tableHTML;
-    }
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Blood Donor BD</h3>
+                    <p>Connecting blood donors with those in need across Bangladesh. Your single donation can save up to three lives. Join our mission today.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/share/1getnhDs55/" class="social-link" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.facebook.com/groups/566092693108418/?ref=share&mibextid=NSMWBT" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                      
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#search"><i class="fas fa-search"></i> Find Donors</a></li>
+                        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSc2AhG_yMIUFhyU53ExHePIZoun9qa0ldME2yuE1FJBZ7bTaw/viewform" target="_blank"><i class="fas fa-user-plus"></i> Register as Donor</a></li>
+                        <li><a href="https://blooddonor-database.blogspot.com/2025/04/blood-donor-bd-body-font-family-segoe.html" target="_blank"><i class="fas fa-sign-in-alt"></i> Admin Login</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:blooddonorbd25@gmail.com"><i class="fas fa-envelope"></i> blooddonorbd25@gmail.com</a></li>
+                        <li><a href="https://wa.me/qr/3ITBKA5Y5SUSI1"><i class="fas fa-phone"></i> Emergency Contact</a></li>
+                        <li><a href="https://maps.app.goo.gl/hgouFTQoppKvKF7p6"><i class="fas fa-map-marker-alt"></i> Bangladesh</a></li>
+                       
+                      
+                    </ul>
+                    <!-- Social Links --><div class="social-links">
+<a href="https://www.facebook.com/MD.Ashfaq01" class="social-link" target="_blank" title="Facebook">
+    <i class="fab fa-facebook-f"></i>
+</a>
 
-    function showSuggestions(type) {
-        let input = document.getElementById(type === 'district' ? "searchDistrict" : "searchUpazila");
-        let list = document.getElementById(type === 'district' ? "autocomplete-list" : "autocomplete-upazila");
-        list.innerHTML = "";
+<a href="https://www.instagram.com/md.ashfaq01" class="social-link" target="_blank" title="Instagram">
+    <i class="fab fa-instagram"></i>
+</a>
 
-        let suggestions = Array.from(type === 'district' ? uniqueDistricts : uniqueUpazilas)
-            .filter(item => item.startsWith(input.value.toUpperCase()))
-            .slice(0, 5);
+<a href="https://www.tiktok.com/@mdashfaq.king?_t=ZS-8zQHzCpJy9H&_r=1" class="social-link" target="_blank" title="TikTok">
+    <i class="fab fa-tiktok"></i>
+</a>
 
-        suggestions.forEach(item => {
-            let div = document.createElement("div");
-            div.textContent = item;
-            div.onclick = () => { input.value = item; list.innerHTML = ""; };
-            list.appendChild(div);
+<a href="https://x.com/Mart_Ashfaq" class="social-link"><i class="fab fa-twitter"></i></a>
+
+<a href="https://www.linkedin.com/in/md-ashfaqur-rahman-tanim-407805290" class="social-link" target="_blank" title="LinkedIn">
+    <i class="fab fa-linkedin-in"></i>
+</a>
+
+<a href="https://www.youtube.com/@md.ashfaq01" class="social-link" target="_blank" title="YouTube">
+    <i class="fab fa-youtube"></i>
+</a>
+
+<a href="https://mdashfaqurrahmantanim.blogspot.com/2024/11/mdashfaq.com.html?m=1" class="social-link" target="_blank" title="Blogger">
+    <i class="fas fa-blog"></i>
+</a></div>
+
+
+
+                </div>
+                
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> Blood Donor BD. All rights reserved. | Developed with <i class="fas fa-heart" style="color: var(--primary);"></i> by <div><a href="https://mdashfaqurrahmantanim.blogspot.com/2024/11/mdashfaq.com.html?m=1" 
+   title="Md. Ashfaqur Rahman Tanim">
+  <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhCDeXufBywGlGcvjFv5OaZNnGnIFboYZgUyo9NPcDt7SH5dWhG6Kv7wOtGMm5uBfA-2RCI41U0IWscQhEPQ9_6mHg192N68FaFDDE4HIfb8zXw6Ubafj329ToS6mYTqHo8Wu8aRidwjczDQZ4Id_t7K-E32b8ZthoHTIH3r86pWwfOmFdNvgcQOOeHBDc/s2000/1000038033.png" 
+       alt="Md. Ashfaqur Rahman Tanim" 
+       style="width:40px; height:40px; border-radius:50%; margin-top:10px;">
+</a><p>Md. Ashfaqur Rahman Tanim</div>
+
+                
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Include html2pdf.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script>
+        // Global variables
+        let donorData = [];
+        let uniqueDistricts = new Set();
+        let uniqueUpazilas = new Set();
+
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // Back to top button functionality
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        document.addEventListener("click", function() {
+        // Fetch total donors count
+        async function fetchTotalDonors() {
+            const sheetURL = 'https://docs.google.com/spreadsheets/d/1p3LQrm9pfvewDNXGZ5sIN_a6hwfbn4AqBcwp8eGPibQ/export?format=tsv';
+
+            try {
+                const response = await fetch(sheetURL);
+                const tsvText = await response.text();
+                const rows = tsvText.trim().split('\n').map(row => row.split('\t'));
+
+                // L2 = 2nd row (index 1), 12th column (index 11)
+                const totalDonors = rows[1][11];
+                document.getElementById('totalDonorDisplay').innerText = totalDonors;
+            } catch (error) {
+                console.error('Error fetching total donors:', error);
+                document.getElementById('totalDonorDisplay').innerText = 'N/A';
+            }
+        }
+
+
+
+        // Fetch donor data from TSV
+        async function fetchDonors() {
+            const sheetURL = 'https://docs.google.com/spreadsheets/d/1p3LQrm9pfvewDNXGZ5sIN_a6hwfbn4AqBcwp8eGPibQ/export?format=tsv';
+            
+            try {
+                const response = await fetch(sheetURL);
+                const data = await response.text();
+                const rows = data.split("\n").map(row => row.split("\t"));
+                donorData = rows.slice(1).map(row => ({
+                    addedTime: row[0],
+                    email: row[1],
+                    bloodGroup: row[2],
+                    phone: row[3],
+                    district: row[4].toUpperCase().trim(),
+                    upazila: row[5].toUpperCase().trim()
+                }));
+
+                // Populate unique values for autocomplete
+                donorData.forEach(donor => {
+                    uniqueDistricts.add(donor.district);
+                    uniqueUpazilas.add(donor.upazila);
+                });
+
+                displayDonors(donorData);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                const tableBody = document.querySelector("#donorTable tbody");
+                if (tableBody) {
+                    tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 2rem; color: var(--gray);">Error loading data. Please try again.</td></tr>';
+                }
+            }
+        }
+
+        // Search donors function
+        function searchDonors() {
+            let blood = document.getElementById("searchBlood").value.toUpperCase();
+            let district = document.getElementById("searchDistrict").value.toUpperCase().trim();
+            let upazila = document.getElementById("searchUpazila").value.toUpperCase().trim();
+
+            let filtered = donorData.filter(donor =>
+                (!blood || donor.bloodGroup === blood) &&
+                (!district || donor.district === district) &&
+                (!upazila || donor.upazila === upazila)
+            );
+
+            displayDonors(filtered);
+        }
+
+        // Display donors in table
+        function displayDonors(filteredData) {
+            let tableBody = document.querySelector("#donorTable tbody");
+            if (!tableBody) {
+                tableBody = document.createElement('tbody');
+                document.getElementById("donorTable").appendChild(tableBody);
+            }
+            
+            tableBody.innerHTML = '';
+            
+            if (filteredData.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 3rem; color: var(--gray); font-size: 1.1rem;"><i class="fas fa-exclamation-circle" style="font-size: 2rem; margin-bottom: 1rem; display: block;"></i>No donors found matching your criteria</td></tr>';
+                return;
+            }
+
+            filteredData.forEach(donor => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${donor.addedTime}</td>
+                    <td><a href="mailto:${donor.email}" style="color: var(--secondary); text-decoration: none;">${donor.email}</a></td>
+                    <td><span style="color: var(--primary); font-weight: bold; font-size: 1.1rem;">${donor.bloodGroup}</span></td>
+                    <td><a href="tel:${donor.phone}" style="color: var(--secondary); text-decoration: none; font-weight: 600;">${donor.phone}</a></td>
+                    <td>${donor.district}</td>
+                    <td>${donor.upazila}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Autocomplete functionality
+        function showSuggestions(type) {
+            let input = document.getElementById(type === 'district' ? "searchDistrict" : "searchUpazila");
+            let list = document.getElementById(type === 'district' ? "autocomplete-list" : "autocomplete-upazila");
             list.innerHTML = "";
-        }, { once: true });
-    }
 
+            if (input.value.length < 1) {
+                list.innerHTML = "";
+                return;
+            }
 
-  fetchDonors();</script><!-- Include html2pdf.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+            let suggestions = Array.from(type === 'district' ? uniqueDistricts : uniqueUpazilas)
+                .filter(item => item.toLowerCase().includes(input.value.toLowerCase()))
+                .slice(0, 8);
 
-<script>
-  function downloadPDF() {
-    const element = document.body;
-    const opt = {
-      margin:       0.2,
-      filename:     'Blood Donor BD.pdf',
-      image:        { type: 'jpeg', quality: 0.98 },
-      html2canvas:  { scale: 2 },
-      jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' }
-    };
+            suggestions.forEach(item => {
+                let div = document.createElement("div");
+                div.textContent = item;
+                div.onclick = () => { 
+                    input.value = item; 
+                    list.innerHTML = ""; 
+                };
+                list.appendChild(div);
+            });
 
-    html2pdf().set(opt).from(element).save();
-  }
-  </script>  <style>
-    .footer {
-      background-color: white;
-      color: #282828;
-      text-align: center;
-      padding: 20px 0;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-    }
+            // Hide suggestions when clicking outside
+            setTimeout(() => {
+                document.addEventListener("click", function hideSuggestions() {
+                    list.innerHTML = "";
+                    document.removeEventListener("click", hideSuggestions);
+                });
+            }, 100);
+        }
 
-    .footer a {
-      color: #00B140;
-      text-decoration: none;
-      font-weight: bold;
-    }
+        // Copy to clipboard function
+        function copyToClipboard() {
+            let table = document.getElementById("donorTable");
+            let rows = table.querySelectorAll("tr");
+            let copyText = "Email,Phone Number,District,Upazila/Area\n";
 
-    .footer a:hover {
-      text-decoration: underline;
-    }
+            for (let i = 1; i < rows.length; i++) {
+                let cells = rows[i].querySelectorAll("td");
+                if (cells.length > 0) {
+                    let email = cells[1].innerText.trim();
+                    let phone = cells[3].innerText.trim();
+                    let district = cells[4].innerText.trim();
+                    let upazila = cells[5].innerText.trim();
+                    copyText += `${email},${phone},${district},${upazila}\n`;
+                }
+            }
 
-    .footer .profile-img {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      margin-bottom: 10px;
-    }
-  </style>
-  
-  <button onclick="topFunction()" id="topBtn" title="Go to top">↑</button>
-<style>
-  #topBtn {
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    right: 30px;
-    z-index: 99;
-    border: none;
-    outline: none;
-    background-color: #d9534f;
-    color: white;
-    cursor: pointer;
-    padding: 12px;
-    border-radius: 50%;
-    font-size: 18px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-  }
+            navigator.clipboard.writeText(copyText).then(() => {
+                alert("Donor information copied to clipboard!");
+            }).catch(err => {
+                console.error("Failed to copy text: ", err);
+                alert("Failed to copy to clipboard. Please try again.");
+            });
+        }
 
-  #topBtn:hover {
-    background-color: #c9302c;
-  }
-</style>
-<script>
-  const topBtn = document.getElementById("topBtn");
+        // Download CSV function
+        function downloadCSV() {
+            let table = document.getElementById("donorTable");
+            let rows = table.querySelectorAll("tr");
+            let csvContent = "Email,Phone Number,District,Upazila/Area\n";
 
-  window.onscroll = function () {
-    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-      topBtn.style.display = "block";
-    } else {
-      topBtn.style.display = "none";
-    }
-  };
+            for (let i = 1; i < rows.length; i++) {
+                let cells = rows[i].querySelectorAll("td");
+                if (cells.length > 0) {
+                    let email = cells[1].innerText.trim();
+                    let phone = cells[3].innerText.trim();
+                    let district = cells[4].innerText.trim();
+                    let upazila = cells[5].innerText.trim();
+                    csvContent += `${email},${phone},${district},${upazila}\n`;
+                }
+            }
 
-  function topFunction() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-</script>
+            let csvBlob = new Blob([csvContent], { type: "text/csv" });
+            let url = URL.createObjectURL(csvBlob);
+            let link = document.createElement("a");
+            link.href = url;
+            link.download = "Blood_Donor_Data.csv";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
 
+        // Download PDF function
+        function downloadPDF() {
+            const element = document.body;
+            const opt = {
+                margin: 0.5,
+                filename: 'Blood_Donor_BD_Data.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
 
-   
-<style>
-.footer {
-  background: #f9f9f9;
-  padding: 25px;
-  text-align: center;
-  border-top: 1px solid #ddd;
-  font-family: Arial, sans-serif;
-}
+            // Show loading indicator
+            const originalText = event.target.innerHTML;
+            event.target.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
+            event.target.disabled = true;
 
-.footer img.profile-img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  margin-bottom: 10px;
-  border: 2px solid #0077cc;
-}
+            html2pdf().set(opt).from(element).save().finally(() => {
+                // Restore button text
+                event.target.innerHTML = originalText;
+                event.target.disabled = false;
+            });
+        }
 
-.footer div {
-  margin: 8px 0;
-  color: #333;
-  font-size: 14px;
-}
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchTotalDonors();
+            fetchDonors();
+            
+            // Add some interactive effects
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px)';
+                });
+                btn.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
 
-.footer a {
-  color: #0077cc;
-  text-decoration: none;
-  margin: 0 8px;
-  font-weight: bold;
-}
+        // Force desktop mode
+        function forceDesktopMode() {
+            const viewport = document.querySelector('meta[name="viewport"]');
+            if (viewport) {
+                viewport.setAttribute('content', 'width=1024, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+            }
+            
+            // Prevent zooming
+            document.addEventListener('gesturestart', function (e) {
+                e.preventDefault();
+            });
+            
+            document.addEventListener('touchmove', function (e) {
+                if (e.scale !== 1) { e.preventDefault(); }
+            }, { passive: true });
+        }
 
-.footer a:hover {
-  text-decoration: underline;
-}
-
-.text {
-  font-weight: bold;
-  text-decoration: underline;
-  margin-top: 15px;
-}
-
-.social-icons {
-  margin-top: 12px;
-}
-
-.social-icons a {
-  display: inline-block;
-  margin: 0 6px;
-}
-
-.social-icons a img {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  transition: transform 0.3s;
-  box-shadow: none !important; /* কোনো শেডো থাকবে না */
-  filter: none !important;      /* কোনো filter থাকবে না */
-  background: transparent;       /* ব্যাকগ্রাউন্ড স্বচ্ছ */
-}
-
-.social-icons a img:hover {
-  transform: scale(1.2);
-}
-</style>
-
-<div class="footer">
-  <img class="profile-img" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgAWoLT5rzuKEw4BabfAq8Iw57EDU33wYj45k2-L5nrSpnthjhtemR-fY3HdM-i7APcyCv98qOJlYazmpc4RqIC9nfRU72Vxmb4fKZe9FB9SlK6cF7YLenMzfBMPawLWsB4NZv2CCvWyREXfHXgykoiAFO7P5SbOqkB_EPZAaonDFCEU9zi4RGRsiw-1TM/s1161/1000027316.png" alt="Md. Ashfaqur Rahman Tanim">
-
-  <div>
-    ©<span id="year"></span> All Rights Reserved to 
-    <a href="https://mdashfaqurrahmantanim.blogspot.com/2024/11/mdashfaq.com.html?m=1" target="_blank">Md. Ashfaqur Rahman Tanim</a>
-  </div>
-
-  <div>
-    <a href="https://facebook.com/groups/gdcrover/" target="_blank">
-      Rover Mate at Gurudoyal Govt. College Rover Scout Group
-    </a>
-  </div>
-
-  <div>
-    <a href="https://www.facebook.com/share/19rSgdSMsP/" target="_blank">Blood Donor BD Facebook Page</a> | 
-    <a href="https://www.facebook.com/groups/566092693108418/?ref=share&mibextid=NSMWBT" target="_blank">Blood Donor BD Facebook Group</a>
-  </div>
-
-  <!-- Personal Social Accounts -->
-  <div class="text">My Personal Social Accounts</div>
-
-  <div class="social-icons">
-    <a href="https://www.facebook.com/MD.Ashfaq01" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook"></a>
-    <a href="https://www.instagram.com/md.ashfaq01" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
-    <a href="https://www.tiktok.com/@mdashfaq.king?_t=ZS-8zQHzCpJy9H&_r=1" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046120.png" alt="TikTok"></a>
-    <a href="https://www.linkedin.com/in/md-ashfaqur-rahman-tanim-407805290" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn"></a>
-    <a href="https://wa.me/qr/3ITBKA5Y5SUSI1" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp"></a>
-    <a href="mailto:mdashfaqurrahmantanim@gmail.com" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email"></a>
-    <a href="https://www.youtube.com/@md.ashfaq01" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/174/174883.png" alt="YouTube"></a>
-    <a href="https://mdashfaqurrahmantanim.blogspot.com/2024/11/mdashfaq.com.html?m=1" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/841/841364.png" alt="Website"></a>
-  </div>
-</div>
-
-<script>
-  // বর্তমান বছর স্বয়ংক্রিয়ভাবে বসবে
-  document.getElementById("year").textContent = new Date().getFullYear();
-</script>
-
-
-   
-  </div>
-</body></html>
+        // Initialize desktop mode
+        forceDesktopMode();
+    </script>
+</body>
+</html>
